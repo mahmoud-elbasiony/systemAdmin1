@@ -1,0 +1,28 @@
+sudo useradd -m itiuser1
+sudo useradd -m itiuser2
+sudo groupadd os_team
+mkdir os_team_workspace
+sudo chgrp os_team os_team_workspace
+sudo usermod -a -G os_team itiuser1
+sudo usermod -a -G os_team itiuser2
+
+//login with itiuser1
+sudo login 
+mkdir /os_team_workspace/mydir1
+stat /os_team_workspace/mydir1/
+
+//login with itiuser2
+sudo login 
+mkdir /os_team_workspace/mydir2
+stat /os_team_workspace/mydir2/
+
+pstree
+
+tail -f /var/log/syslog
+ctrl+z
+jobs
+bg 2
+ps -axu |grep "tail"
+kill 60705
+
+
