@@ -1,0 +1,21 @@
+nano script.sh
+========================
+while true
+do
+	ls /var/log >> /tmp/list.log
+	sleep 5
+done
+========================
+cp script.sh /usr/local/bin/
+bash script.sh
+========================
+sudo cat /lib/systemd/system/cron.service /lib/systemd/system/bg-script.service 
+
+sudo daemon-reload
+sudo start bg-script.service 
+sudo status bg-script.service 
+
+=========================
+crontab -e
+
+*/5 * * * * cat/tmp/list.log >> /tmp/list.log.1 | tar /tmp/list.log.1.gz /tmp/list.log.1
