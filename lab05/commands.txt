@@ -1,0 +1,35 @@
+
+
+1-using dd command create empty file with size of 20MB (hint: count 40000, bs=512)
+	
+2-attach the file as loop device using losetup command (hint: use losetup -f to allocate free device)
+	
+3-using fdisk command, create new partition into the loop device (`fdisk /dev/loop<??>` where <??> is the device number)
+	
+4-format the new partition using mkfs.ext4 command 
+	
+5-mount the formatted partition into /mnt directory 
+	
+6- create some files inside the mounted /mnt directory
+	
+7-unmount /mnt directory using umount command
+	
+8-using `apt` command, search and install `gparted` program
+	
+9-navigate and use gparted to detect the the new partition.
+
+
+
+dd if=/dev/zero of=disk.img bs=512 count=40000
+losetup -f
+sudo losetup /dev/loop14 disk.img
+sudo fdisk /dev/loop14
+sudo partprope /dev/loop14
+sudo mkfs.ext4 /dev/loop14p1
+sudo mount /dev/loop14p1 /mnt
+sudo touch /mnt/file1.txt
+sudo mount /dev/loop14p1 /mnt
+sudo umount /mnt
+apt search gparted
+sudo apt install gparted
+sudo gparted /dev/loop14
